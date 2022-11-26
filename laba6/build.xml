@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<project name = "Main" default = "run">
+    <target name="compile">
+        <echo>Compile common java files</echo>
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src/org/bsuir/gr874004/Mazhuhin/laba4/proj1" destdir="build/classes" includeantruntime="false">
+        </javac>
+    </target>
+
+    <target name="jar" depends ="compile">
+        <echo>Make jar file</echo>
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/Proj1.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-class" value="src.org.bsuir.gr874004.Mazhuhin.proj1.Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" depends ="jar">
+        <java jar="build/jar/Proj1.jar" fork="true"/>
+    </target>
+</project>

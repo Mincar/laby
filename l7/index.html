@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 7</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 class="center">Laba 7</h1>
+    <div class="buttons">
+        <button class="button" onclick="loadXMLDoc()">Open table</button>
+        <button class="button" onclick="ll()">Transform grade</button>
+    </div>
+    <table id="demo" cellspacing="0" cellpadding="2">
+        <tr>
+            <th>№</th>
+            <th>Students</th>
+            <th>Grade</th>
+        </tr>
+    </table>
+    <script>
+        function loadXMLDoc() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    myFunction(this);
+                }
+            };
+            xmlhttp.open("GET", "xmldata.xml", true);
+            xmlhttp.send();
+        }
+
+        function ll() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    myf(this);
+                }
+            };
+            xmlhttp.open("GET", "xmldata.xml", true);
+            xmlhttp.send();
+        }
+
+        function myFunction(xml) {
+            var x, i, xmlDoc, table;
+            xmlDoc = xml.responseXML;
+            table = "<tr><th>№</th><th>Students</th><th>Grade</th></tr>";
+            x = xmlDoc.getElementsByTagName("gradeRecord");
+            for (i = 0; i < x.length; i++) {
+                var a = x[i].getElementsByTagName("grade")[0].childNodes[0].nodeValue;
+                table += "<tr><td>" + i +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("student")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    a +
+                    "</td></tr>";
+            }
+            document.getElementById("demo").innerHTML = table;
+        };
+
+        function myf(xml) {
+            var x, i, xmlDoc, table;
+            xmlDoc = xml.responseXML;
+            table = "<tr><th>№</th><th>Students</th><th>Grade</th></tr>";
+            x = xmlDoc.getElementsByTagName("gradeRecord");
+            for (i = 0; i < x.length; i++) {
+                var a = x[i].getElementsByTagName("grade")[0].childNodes[0].nodeValue;
+                if (a == 4 || a == 3) {
+                    var a = "chetyre"
+                }
+                ;
+                if (a == 2) {
+                    var a = "dva"
+                }
+                ;
+                if (a == 5) {
+                    var a = "pyat'"
+                }
+                ;
+                table += "<tr><td>" + i +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("student")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    a +
+                    "</td></tr>";
+            }
+            document.getElementById("demo").innerHTML = table;
+        };
+    </script>
+</body>
+
+</html>
